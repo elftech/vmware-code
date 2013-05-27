@@ -1,0 +1,7 @@
+blue: 		Directory
+green:		Executable
+red:		Compressed Files
+light bule:    	Links
+grep:		Others
+yellow:		Device
+red blinking:	Wrong Links

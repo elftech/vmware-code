@@ -1,0 +1,14 @@
+#!/bin/sh
+
+./udpcli01 127.0.0.1 < /usr/share/misc/pci.ids > /home/binyuan/temp.1 &
+./udpcli01 127.0.0.1 < /usr/share/misc/pci.ids > /home/binyuan/temp.2 &
+./udpcli01 127.0.0.1 < /usr/share/misc/pci.ids > /home/binyuan/temp.3 &
+./udpcli01 127.0.0.1 < /usr/share/misc/pci.ids > /home/binyuan/temp.4 &
+./udpcli01 127.0.0.1 < /usr/share/misc/pci.ids > /home/binyuan/temp.5 &
+./udpcli01 127.0.0.1 < /usr/share/misc/pci.ids > /home/binyuan/temp.6 &
+
+wait
+
+echo "Hello"
+kill 1 $$
+echo "Send SIGHUP"
