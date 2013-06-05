@@ -1,0 +1,15 @@
+#include <time.h>
+
+void main()
+{
+    time_t ovrflw;
+    double x;
+    time(&ovrflw);
+    printf("%s",ctime(&ovrflw));
+    printf("%d\n",ovrflw);
+    printf("%d\n",sizeof(time_t));
+    printf("%d\n",sizeof(double));
+    while( (~ovrflw) != 0)
+	ovrflw+=ovrflw;
+    printf("%d\n",ovrflw);
+}

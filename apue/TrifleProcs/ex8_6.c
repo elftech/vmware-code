@@ -1,0 +1,15 @@
+#include "apue.h"
+#include <sys/wait.h>
+
+int main(void)
+{
+    pid_t pid;
+    if ((pid = fork() ) < 0)
+	printf("fork error!\n");
+    else if (pid == 0){
+	exit(0);
+    }
+    sleep(5);
+    system("ps -a -o pid,ppid,s,tty,comm");
+    exit(0);
+}

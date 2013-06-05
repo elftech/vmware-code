@@ -1,0 +1,12 @@
+extern char **environ;
+void main()
+{
+    int i;
+    for(i=0;environ[i]!=0;++i)
+    	printf("%s\n",environ[i]);
+    char *str1="WHATEVER";
+    char *str2="whatever";
+    strcpy(&environ[i][0],str1);
+    environ[i][8]='=';
+    strcpy(&environ[i][9],str2);
+}

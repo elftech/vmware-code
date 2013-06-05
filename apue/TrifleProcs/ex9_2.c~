@@ -1,0 +1,25 @@
+#include <error.h>
+#include <unistd.h>
+#include <fcntl.h>
+
+void main()
+{
+    pid_t pid;
+    if( (pid=fork()) < 0)
+	printf("can't fork\n");
+    else if( pid==0){
+	setsid();
+	printf("We can use terminal to output\n");
+	printf("child process's pid,pgid:%d %d\n",getpid(),getpgid(0));
+	if(getpid()==getpgid(0))
+	    printf("Child has been the leader of process group:%d\n",getpgid(0));
+	}
+    else
+	exit(0);
+    if(open("/dev/tty",O_RDWR)<0){
+	printf("open control terminal error\n");
+	exit(1);
+    }
+    exit(0);
+    
+}

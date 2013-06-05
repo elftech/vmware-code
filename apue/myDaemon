@@ -1,0 +1,39 @@
+# !/bin/bash
+
+# location 
+# /etc/init.d/myDaemon
+
+# Configuration
+# ????? 
+
+RET=0
+PRG="myDaemon"
+MYPATH="/home/tangsong/work/TrifileProcs"
+
+start(){
+    echo  "Starting $PRG:"
+    /home/tangsong/work/TrifleProcs/myDaemon&
+#$MYPATH/$PRG& 
+    RET=$?
+}
+
+stop(){
+    echo "Stoping $PRG"
+    kill -9 $(ps -ef|grep $PRG|grep -v grep|grep -v vim|awk '{printf $2}')
+    RET=$?
+}
+
+#see how we were called
+case "$1" in
+    start)
+        start
+	;;
+    stop)
+        stop
+	;;
+    *)
+        echo "Usage: $0 {start|stop}"
+	exit 1
+esac
+
+exit $RET

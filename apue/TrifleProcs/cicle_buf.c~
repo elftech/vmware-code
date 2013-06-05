@@ -1,0 +1,13 @@
+
+void main()
+{
+    lry Q;
+    lry_init(&Q);
+    int i,j;
+
+    for (i=0;i<60;++i)
+	lry_in(Q,&i);
+
+    for (i=0;i<60;++i)
+	lry_out(Q,&j);
+}

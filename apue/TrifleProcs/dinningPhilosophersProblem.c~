@@ -1,0 +1,16 @@
+/*===============================================================
+
+ * File Name : dinningPhilosophersProblem.c
+ * Creation Date : 2013-04-11
+ * Last Modified : 2013年04月11日 星期四 20时56分02秒
+ * Create By : Binyuan
+ * Email : elf.ggle@gmail.com
+ * Purpose :
+
+================================================================*/
+
+#include <stdio.h>
+#include <sys/types.h>
+#include <semaphore.h>
+#include <pthread.h>
+#include <stdlib.h>

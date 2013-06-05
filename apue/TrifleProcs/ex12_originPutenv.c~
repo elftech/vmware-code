@@ -1,0 +1,7 @@
+#include "stdio.h"
+
+void main()
+{
+    char *buf="WHATEVER=whatever";
+    putenv(buf);
+}

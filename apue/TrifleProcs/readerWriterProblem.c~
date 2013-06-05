@@ -1,0 +1,75 @@
+/*===============================================================
+
+ * File Name : readerWriterProblem.c
+ * Creation Date : 2013-04-11
+ * Last Modified : 2013年04月11日 星期四 21时48分54秒
+ * Create By : Binyuan
+ * Email : elf.ggle@gmail.com
+ * Purpose :
+
+================================================================*/
+
+#include <stdio.h>
+#include <sys/types.h>
+#include <semaphore.h>
+#include <pthread.h>
+#include <stdlib.h>
+
+#define READER_NUM 5
+void *reader_handler(void *ptr);
+void *writer_handler(void *ptr);
+
+void main()
+{
+	sem_init(&mutex,0,1);
+	sem_init(&blank,0,buffer_size);
+	sem_init(&fill,0,0);
+
+	int err,i;
+	pthread_t reader[READER_NUM],writer;
+	for(i=0;i<READER_NUM;++i){
+	err=pthread_create(&reader[i],NULL,reader_handler,NULL);
+	if(err!=0)
+		err_quit("can't create thread: %s\n",strerror(err));
+	}
+	err=pthread_create(&writer,NULL,writer_handler,NULL);
+	if(err!=0)
+		err_quit("can't create thread: %s\n",strerror(err));
+
+	sleep(10);
+
+}
+
+void *reader_handler(void *ptr)
+{
+	while(1){
+		static int data=0;
+		sem_wait(&blank);
+	//	sem_wait(&mutex);
+	
+		buffer[in]=++data;
+		printf("%d has been input to the buffer\n",data);
+		in=(in+1+buffer_size)%buffer_size;
+	//	sem_post(&mutex);
+		sem_post(&fill);
+		sleep(1);
+	}
+	return ((void *)0);
+}
+
+void *reader_handler(void *ptr)
+{
+	while(1){
+		static int data=0;
+		sem_wait(&blank);
+	//	sem_wait(&mutex);
+	
+		buffer[in]=++data;
+		printf("%d has been input to the buffer\n",data);
+		in=(in+1+buffer_size)%buffer_size;
+	//	sem_post(&mutex);
+		sem_post(&fill);
+		sleep(1);
+	}
+	return ((void *)0);
+}
