@@ -1,0 +1,18 @@
+总用量 64
+-rw-rw-r-- 1 tangsong tangsong     0 2011-04-10 13:27 haha
+-rw-r--r-- 1 tangsong tangsong    59 2011-04-10 10:28 hello.c
+-rw-r--r-- 1 tangsong tangsong  5173 2011-04-11 11:09 manpath.config
+-rw-r--r-- 1 tangsong tangsong     0 2011-04-11 20:39 new.txt
+-rwxr-xr-x 1 tangsong tangsong 37140 2011-04-10 09:14 passwd
+-rw-r--r-- 1 tangsong tangsong    25 2011-04-11 14:31 test.txt
+drwxr-xr-x 2 tangsong tangsong  4096 2011-04-11 15:32 vitest
+drwxr-xr-x 2 tangsong tangsong  4096 2011-04-11 12:15 未命名文件夹
+总用量 68
+-rw-rw-r-- 1 tangsong tangsong     0 2011-04-10 13:27 haha
+-rw-r--r-- 1 tangsong tangsong    59 2011-04-10 10:28 hello.c
+-rw-r--r-- 1 tangsong tangsong  5173 2011-04-11 11:09 manpath.config
+-rw-r--r-- 1 tangsong tangsong   523 2011-04-11 20:39 new.txt
+-rwxr-xr-x 1 tangsong tangsong 37140 2011-04-10 09:14 passwd
+-rw-r--r-- 1 tangsong tangsong    25 2011-04-11 14:31 test.txt
+drwxr-xr-x 2 tangsong tangsong  4096 2011-04-11 15:32 vitest
+drwxr-xr-x 2 tangsong tangsong  4096 2011-04-11 12:15 未命名文件夹

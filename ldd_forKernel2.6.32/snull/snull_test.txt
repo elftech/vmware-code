@@ -1,0 +1,49 @@
+[root@localhost ~]# insmod snull.o
+
+[root@localhost ~]# dmesg | tail -n1
+
+[root@localhost ~]# vi /etc/hosts
+# Do not remove the following line, or various programs
+# that require network functionality will fail.
+127.0.0.1               localhost.localdomain localhost
+192.168.0.88             local0
+192.168.0.99             remote0
+192.168.1.99             local1
+192.168.1.88             remote1
+
+[root@localhost ~]# vi /etc/networks
+snullnet0             192.168.0.0         
+snullnet1             192.168.1.0       
+
+[root@localhost snull]# ifconfig sn0 local0
+
+[root@localhost snull]# ifconfig sn1 local1
+
+[root@localhost snull]# route add -net snullnet0 netmask 255.255.255.0 sn0
+
+[root@localhost snull]# route add -net snullnet1 netmask 255.255.255.0 sn1
+[root@localhost snull]# ifconfig sn0
+sn0       Link encap:Ethernet  HWaddr 00:53:4E:55:4C:30  
+          inet addr:192.168.0.1  Bcast:192.168.0.255  Mask:255.255.255.0
+          inet6 addr: fe80::253:4eff:fe55:4c30/64 Scope:Link
+          UP BROADCAST RUNNING NOARP MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:16 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:0 (0.0 b)  TX bytes:2699 (2.6 KiB)
+[root@localhost snull]# ifconfig sn1 
+sn1       Link encap:Ethernet  HWaddr 00:53:4E:55:4C:31  
+          inet addr:192.168.1.2  Bcast:192.168.1.255  Mask:255.255.255.0
+          inet6 addr: fe80::253:4eff:fe55:4c31/64 Scope:Link
+          UP BROADCAST RUNNING NOARP MULTICAST  MTU:1500  Metric:1
+          RX packets:16 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:13 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:2699 (2.6 KiB)  TX bytes:2492 (2.4 KiB)
+[root@localhost snull]# ping -c 1 remote0
+PING remote0 (192.168.0.2) 56(84) bytes of data.
+64 bytes from remote0 (192.168.0.2): icmp_seq=1 ttl=64 time=11.4 ms
+--- remote0 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 11.468/11.468/11.468/0.000 ms
+

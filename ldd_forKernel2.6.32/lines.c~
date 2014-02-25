@@ -1,0 +1,102 @@
+#include "stdio.h"
+#include "stdlib.h"
+
+int search(int **p,int a,int height,int width)
+{
+    int i,j;
+    j=a-1;
+    i=0;
+    while(i<height){
+	while(i<height&&p[i][j]==0)
+	    ++i;
+	printf("%d %d\n",i,j);
+	if(i==height)
+	    return j;
+	if(p[i][j]==1)
+	    ++j;
+	else if(p[i][j]==-1)
+	    --j;
+	++i;
+    }
+    return j;
+}
+
+void main()
+{
+    int num,i,*rslt,numP,numL,numB;
+    scanf("%d",&num);
+    rslt=(int *)malloc(num*sizeof(int *));
+    for(i=0;i<num;++i){
+	scanf("%d %d %d",&numP,&numL,&numB);
+	if(numL==0){
+	    rslt[i]=0;
+	    continue;
+	}
+	int *lines=(int *)malloc(sizeof(int)*numL);
+	int *y=(int *)malloc(sizeof(int)*numL);
+
+	int j,null,k;
+	int **bArray;
+	bArray=(int **)malloc(sizeof(int *)*(2*numL+1));
+	for(j=0;j<numL*2+1;++j)
+	    bArray[j]=(int *)calloc(numP,sizeof(int));
+
+	for(j=0;j<numL;++j)
+	    scanf("%d %d %d",lines+j,&null,y+j);
+	
+	//Sort the lines
+	for(j=0;j<numL-1;++j)
+	    for(k=j+1;k<numL;++k)
+		if(y[j]>y[k]){
+		    int tmp=y[j];
+		    y[j]=y[k];
+		    y[k]=tmp;
+		    tmp=lines[j];
+		    lines[j]=lines[k];
+		    lines[k]=tmp;
+		}
+//	for(j=0;j<numL;++j)
+//    	    printf("%d ",y[j]);
+//	printf("\n");
+//	for(j=0;j<numL;++j)
+//	    printf("%d",lines[j]);
+	//initial bArray;
+	for(j=0;j<numL;++j){
+	    bArray[2*y[j]-1][lines[j]]=-1;
+	    bArray[2*y[j]-1][lines[j]-1]=1;
+	}
+//	for(j=0;j<numL*2+1;++j){
+//	    for(k=0;k<numP;++k)
+//		printf("%d ",bArray[j][k]);
+//		printf("\n");
+//	    }
+	j=search(bArray,numB,numL*2+1,numP);
+	printf("%d\n",j);
+	//bruse it
+	rslt[i]=0;
+	for(j=0;j<numL*2+1;++j)
+	    for(k=0;k<numP-1;++k)
+		if(bArray[j][k]==0){
+		    //we need take the neighbour elements into consideration too!!
+		    if(k>0&&bArray[j][k-1]!=0)
+			break;
+		    bArray[j][k]=1;
+		    bArray[j][k+1]=-1;
+		    if(search(bArray,numB,numL*2+1,numP)){
+			    rslt[i]=1;
+			    printf("Once !\n");
+			    j=numL*2+1;
+			    break;
+			    }
+		    bArray[j][k]=0;
+		    }
+	//you should delete the heap you allocted
+    }
+    for(i=0;i<num;++i)
+	if(rslt[i]==1)
+	    printf("Yes\n");
+	else if(rslt[i]==0)
+	    printf("No\n");
+}
+
+	

@@ -1,0 +1,11 @@
+#!/bin/sh
+module="silly"
+device="silly"
+
+/sbin/rmmod $module $* || exit 1
+
+rm -f /dev/${device}a 
+rm -f /dev/${device}b
+rm -f /dev/${device}c
+rm -f /dev/${device}d
+

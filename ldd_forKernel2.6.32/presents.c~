@@ -1,0 +1,38 @@
+#include "stdio.h"
+#include "stdlib.h"
+#include "math.h"
+
+void main()
+{
+    int num,k,a,b,loc,i;
+    int * result;
+    scanf("%d",&num);
+    result=(int *)malloc(num*sizeof(int));
+    for(i=0;i<num;++i){
+	int tmp,tmpA,tmpB,r,rA,rB;
+	loc=0;
+	scanf("%d %d %d",&k,&a,&b);
+	r=tmp=k;
+	rA=tmpA=a;
+	rB=tmpB=b;
+	while(tmp){
+	    tmp/=10;
+	    tmpA/=10;
+	    tmpB/=10;
+	    ++loc;
+	}
+	rA=a%pow(10,loc);
+	rB=b%pow(10,loc);
+	result[i]=tmpB-tmpA;
+	if(rA>=k)
+	    ++result[i];
+	if(rB>=k)
+	    ++result[i];
+	if(rA>=k&&rB>=k&&rA==rB)
+	    --result[i];
+    }
+    for(i=0;i<num;++i)
+	printf("%d\n",result[i]);
+}
+
+

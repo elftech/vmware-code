@@ -1,0 +1,35 @@
+#!/bin/sh
+
+module="silly"
+device="silly"
+mode=664
+
+group="staff"
+
+/sbin/insmod ./$module.ko $*||exit 1
+
+major=$(awk '$2=="'$module'" {print $1}' /proc/devices)
+
+rm -f /dev/${device}a
+mknod /dev/${device}a c $major 0
+
+chgrp $group /dev/${device}a
+chmod $mode  /dev/${device}a
+
+rm -f /dev/${device}b
+mknod /dev/${device}b c $major 1
+
+chgrp $group /dev/${device}b
+chmod $mode  /dev/${device}b
+
+rm -f /dev/${device}c
+mknod /dev/${device}c c $major 2
+
+chgrp $group /dev/${device}c
+chmod $mode  /dev/${device}c
+
+rm -f /dev/${device}d
+mknod /dev/${device}d c $major 3
+
+chgrp $group /dev/${device}d
+chmod $mode  /dev/${device}d
